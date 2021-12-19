@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch</title>
+    <style>
+        body{
+        background-color: chocolate;
+        }
+        #table{
+            margin-left: 9%;
+            
+        }
+        #table th, #table td{
+            border: 3px solid rgb(102, 25, 6);
+            padding: 20px;
+            padding-left: 100px;
+            padding-right: 100px;
+            text-align: center;
+            color: black;
+            font-size: 20px;
+            background-color: yellowgreen;
+        }
+        
+        #table td{
+            text-align: center;
+        }
+        h2{
+            font-size: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 50px;
+        margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Api details</h2>
+    <table id="table">
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Year</th>
+            <th>Color</th>
+        </tr>
+    </table>
+    <script >
+        let r =fetch('https://reqres.in/api/user');
+
+let s = r.then(function(response){
+   return response.json();
+});
+
+s.then(function(info){
+    console.log(info);
+    let displayData=info.data;
+    for(let i=0; i<displayData.length; i++)
+    {
+        let id=displayData[i].id;
+        let name=displayData[i].name;
+        let year=displayData[i].year;
+        let color=displayData[i].color;
+        let table=document.querySelector('table');
+        let tableRow=document.createElement('tr');
+
+        tableRow.innerHTML='<td>'+ id +'</td>' + '<td>'+name+'</td>'+ '<td>'+year +'</td>'+ '<td>'+color+'</td>';
+        table.appendChild(tableRow);
+
+    }
+
+});
+    </script>
+</body>
+</html>
